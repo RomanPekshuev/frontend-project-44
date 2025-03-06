@@ -2,37 +2,61 @@
 
 import readlineSync from 'readline-sync';
 
-const getRandomNumber = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-const generateProgression = (length, step, hiddenIndex) => {
-    const progression = [];
-    const start = getRandomNumber(1, 10);
-    for (let i = 0; i < length; i++) {
-        progression.push(start + i * step);
-    }
-    progression[hiddenIndex] = '..';
-    return progression;
+const generateProgression = (length, step) => {
+    const start = getRandomInt(1, 10);
+    return Array.from({ length }, (_, i) => start + i * step);
 };
 
-const brainProgression = () => {
+const playGame = () => {
+    console.log('Welcome to the Brain Games!');
+    const name = readlineSync.question('May I have your name? ');
+    console.log(`Hello, ${name}!`);
     console.log('What number is missing in the progression?');
-    const length = getRandomNumber(5, 10);
-    const step = getRandomNumber(1, 5);
-    const hiddenIndex = getRandomNumber(0, length - 1);
 
-    const progression = generateProgression(length, step, hiddenIndex);
-    const correctAnswer = progression[hiddenIndex] === '..' ? progression[hiddenIndex - 1] + step : progression[hiddenIndex];
+    const progressionLength = getRandomInt(5, 10);
+    const step = getRandomInt(1, 5);
+    const progression = generateProgression(progressionLength, step);
+
+    const hiddenIndex = getRandomInt(0, progression.length - 1);
+    const hiddenNumber = progression[hiddenIndex];
+    progression[hiddenIndex] = '..';
 
     console.log(`Question: ${progression.join(' ')}`);
-    
-    const userAnswer = readlineSync.question('Your answer: ');
 
-    if (parseInt(userAnswer, 10) === correctAnswer) {
+    const answer = readlineSync.question('Your answer: ');
+
+    if (parseInt(answer, 10) === hiddenNumber) {
         console.log('Correct!');
     } else {
-        console.log(`'${userAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-        console.log("Let's try again!");
+        console.log(`'${answer}' is wrong answer ;(. Correct answer was '${hiddenNumber}'.`);
+        console.log(`Let's try again, ${name}!`);
+        return;
     }
+
+    for (let i = 0; i < 2; i++) {
+        const progressionLength = getRandomInt(5, 10);
+        const step = getRandomInt(1, 5);
+        const progression = generateProgression(progressionLength, step);
+
+        const hiddenIndex = getRandomInt(0, progression.length - 1);
+        const hiddenNumber = progression[hiddenIndex];
+        progression[hiddenIndex] = '..';
+
+        console.log(`Question: ${progression.join(' ')}`);
+        const answer = readlineSync.question('Your answer: ');
+
+        if (parseInt(answer, 10) !== hiddenNumber) {
+            console.log(`'${answer}' is wrong answer ;(. Correct answer was '${hiddenNumber}'.`);
+            console.log(`Let's try again, ${name}!`);
+            return;
+        } else {
+            console.log('Correct!');
+        }
+    }
+
+    console.log(`Congratulations, ${name}!`);
 };
 
-brainProgression();
+playGame();
