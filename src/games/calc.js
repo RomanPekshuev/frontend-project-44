@@ -1,5 +1,4 @@
-import getRandomInt from '../utils.js'; // Предположим, что у вас есть утилита для генерации случайных чисел
-
+import getRandomInt from '../utils.js';
 const operations = ['+', '-', '*'];
 
 const calcGame = () => {
