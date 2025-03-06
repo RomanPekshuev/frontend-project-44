@@ -9,3 +9,15 @@ To start the game, run the following command:
 You will be prompted to enter your name and then asked to find the greatest common divisor (GCD) of two random numbers.
 
 ### Example Output
+
+# Brain Games
+
+## Установка
+
+Для установки зависимостей выполните:
+
+## Запуск игры "Простое ли число?"
+
+Чтобы запустить игру, выполните следующую команду:
+
+### Пример работы игры
