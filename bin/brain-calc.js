@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 
 import { startGame } from '../src/index.js';
-import { runCalcGame } from '../src/games/calc.js';
+import { getCalcGame } from '../src/games/calc.js';
 
-startGame(runCalcGame);
+console.log('Welcome to the Brain Games!');
+const userName = startGame();
+getCalcGame(userName);
