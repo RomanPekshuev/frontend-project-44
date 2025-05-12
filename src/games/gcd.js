@@ -1,20 +1,25 @@
 #!/usr/bin/env node
-import getRandomNumber from '../utils/random.js';
+import { randomizer } from '../utils.js';
+import playGame from '../index.js';
 
-const getGCD = (a, b) => {
-  while (b !== 0) {
-    [a, b] = [b, a % b];
-  }
-  return a;
+const gameRules = 'Find the greatest common divisor of given numbers.';
+
+const gcd = (a, b) => {
+    while (b !== 0) {
+        [a, b] = [b, a % b];
+    }
+    return a;
 };
 
-const generateRound = () => {
-  const a = getRandomNumber(1, 100);
-  const b = getRandomNumber(1, 100);
-  const question = `${a} ${b}`;
-  const correctAnswer = String(getGCD(a, b));
-  return { question, correctAnswer };
+const getQuestionAndAnswer = () => {
+    const firstNumber = randomizer();
+    const secondNumber = randomizer();
+    const question = `${firstNumber} ${secondNumber}`;
+    const correctAnswer = String(gcd(firstNumber, secondNumber));
+    
+    return [question, correctAnswer];
 };
 
-export const description = 'Find the greatest common divisor of given numbers.';
-export default generateRound;
+export default () => {
+    playGame(gameRules, getQuestionAndAnswer);
+};

@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-import getRandomNumber from '../utils/random.js';
+import { randomizer, getCorrectAnswer } from '../utils.js';
+import playGame from '../index.js';
 
-const isEven = (n) => n % 2 === 0;
+const gameRules = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-const generateRound = () => {
-  const question = getRandomNumber(1, 100);
-  const correctAnswer = isEven(question) ? 'yes' : 'no';
-  return { question, correctAnswer };
+const getQuestionAndAnswer = () => {
+  const number = randomizer();
+  return [String(number), getCorrectAnswer(number)];
 };
 
-export const description = 'Answer "yes" if the number is even, otherwise answer "no".';
-export default generateRound;
+export default () => {
+  playGame(gameRules, getQuestionAndAnswer);
+};

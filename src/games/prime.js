@@ -1,20 +1,17 @@
 #!/usr/bin/env node
-import getRandomNumber from '../utils/random.js';
+import { randomizer } from '../utils.js';
+import playGame from '../index.js';
 
-const isPrime = (n) => {
-  if (n < 2) return false;
-  for (let i = 2, sqrt = Math.sqrt(n); i <= sqrt; i += 1) {
-    if (n % i === 0) return false;
-  }
-  return true;
+const gameRules = 'Answer "yes" if the number is even, otherwise answer "no".';
+
+const getQuestionAndAnswer = () => {
+    const number = randomizer();
+    const question = `${number}`;
+    const correctAnswer = number % 2 === 0 ? 'yes' : 'no';
+    
+    return [question, correctAnswer];
 };
 
-const generateRound = () => {
-  const number = getRandomNumber(1, 100);
-  const question = String(number);
-  const correctAnswer = isPrime(number) ? 'yes' : 'no';
-  return { question, correctAnswer };
+export default () => {
+    playGame(gameRules, getQuestionAndAnswer);
 };
-
-export const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
-export default generateRound;

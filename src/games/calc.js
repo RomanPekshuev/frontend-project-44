@@ -1,32 +1,34 @@
 #!/usr/bin/env node
-const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+import { randomizer } from '../utils.js';
+import playGame from '../index.js';
 
-const operations = ['+', '-', '*'];
+const gameRules = 'What is the result of the expression?';
+const operators = ['+', '-', '*'];
 
-const getQuestionAndAnswer = () => {
-    const num1 = getRandomInt(1, 100);
-    const num2 = getRandomInt(1, 100);
-    const operation = operations[getRandomInt(0, operations.length - 1)];
-
-    let answer;
-    switch (operation) {
-        case '+':
-            answer = (num1 + num2).toString();
-            break;
-        case '-':
-            answer = (num1 - num2).toString();
-            break;
-        case '*':
-            answer = (num1 * num2).toString();
-            break;
-        default:
-            break;
-    }
-
-    const question = `${num1} ${operation} ${num2}`;
-    return { question, answer };
+const calculate = (leftOperand, rightOperand, operator) => {
+  switch (operator) {
+    case '+':
+      return leftOperand + rightOperand;
+    case '-':
+      return leftOperand - rightOperand;
+    case '*':
+      return leftOperand * rightOperand;
+    default:
+      throw new Error(`Unknown operator: ${operator}`);
+  }
 };
 
-const description = 'What is the result of the expression?';
+const getQuestionAndAnswer = () => {
+  const leftOperand = randomizer();
+  const rightOperand = randomizer();
+  const operator = operators[randomizer(operators.length)];
+  
+  const question = `${leftOperand} ${operator} ${rightOperand}`;
+  const correctAnswer = calculate(leftOperand, rightOperand, operator);
+  
+  return [question, String(correctAnswer)];
+};
 
-export default { getQuestionAndAnswer, description };
+export default () => {
+  playGame(gameRules, getQuestionAndAnswer);
+};

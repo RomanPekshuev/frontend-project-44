@@ -1,4 +1,5 @@
 #!/usr/bin/env node
-import getRandomNumber from '../utils/random.js';
 
-playGame(getRandomNumber);
+import playEven from '../src/games/isEven.js';
+
+playEven();

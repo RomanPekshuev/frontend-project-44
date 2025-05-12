@@ -1,21 +1,28 @@
 #!/usr/bin/env node
-import getRandomNumber from '../utils/random.js';
+import { randomizer } from '../utils.js';
+import playGame from '../index.js';
 
-const generateProgression = (start, step, length) => {
-  return Array.from({ length }, (_, i) => start + i * step);
+const gameRules = 'What number is missing in the progression?';
+
+const getProgression = () => {
+  const startPoint = randomizer(100);
+  const step = randomizer(15);
+  return Array.from({ length: 10 }, (_, i) => startPoint + i * step);
 };
 
-const generateRound = () => {
-  const progressionLength = 10;
-  const start = getRandomNumber(1, 50);
-  const step = getRandomNumber(1, 10);
-  const progression = generateProgression(start, step, progressionLength);
-  const hiddenIndex = getRandomNumber(0, progressionLength - 1);
-  const correctAnswer = String(progression[hiddenIndex]);
-  progression[hiddenIndex] = '..';
+const getQuestionAndAnswer = () => {
+  const progression = getProgression();
+  const indexOfHiddenElement = randomizer(10);
+  
+  const correctAnswer = progression[indexOfHiddenElement];
+  
+  progression[indexOfHiddenElement] = '..';
+  
   const question = progression.join(' ');
-  return { question, correctAnswer };
+
+  return [question, String(correctAnswer)];
 };
 
-export const description = 'What number is missing in the progression?';
-export default generateRound;
+export default () => {
+  playGame(gameRules, getQuestionAndAnswer);
+};
