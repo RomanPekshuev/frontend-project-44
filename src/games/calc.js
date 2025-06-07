@@ -1,31 +1,27 @@
-#!/usr/bin/env node
 import { randomizer } from '../utils.js';
 import playGame from '../index.js';
 
 const gameRules = 'What is the result of the expression?';
-const operators = ['+', '-', '*'];
 
-const calculate = (leftOperand, rightOperand, operator) => {
-  switch (operator) {
-    case '+':
-      return leftOperand + rightOperand;
-    case '-':
-      return leftOperand - rightOperand;
-    case '*':
-      return leftOperand * rightOperand;
-    default:
-      throw new Error(`Unknown operator: ${operator}`);
-  }
-};
+const operators = ['+', '-', '*'];
 
 const getQuestionAndAnswer = () => {
   const leftOperand = randomizer();
   const rightOperand = randomizer();
-  const operator = operators[randomizer(operators.length)];
-  
-  const question = `${leftOperand} ${operator} ${rightOperand}`;
-  const correctAnswer = calculate(leftOperand, rightOperand, operator);
-  
+  const operator = operators[randomizer(3)];
+  // const question = `${leftOperand} ${operator} ${rightOperand}`;
+  if (operator === '+') {
+    const question = `${leftOperand} + ${rightOperand}`;
+    const correctAnswer = leftOperand + rightOperand;
+    return [question, String(correctAnswer)];
+  }
+  if (operator === '-') {
+    const question = `${leftOperand} - ${rightOperand}`;
+    const correctAnswer = leftOperand - rightOperand;
+    return [question, String(correctAnswer)];
+  }
+  const question = `${leftOperand} * ${rightOperand}`;
+  const correctAnswer = leftOperand * rightOperand;
   return [question, String(correctAnswer)];
 };
 
