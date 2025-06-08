@@ -10,14 +10,14 @@ const playGame = (gameRules, getQuestionAndAnswer) => {
     console.log(`Question: ${question}`);
     const yourAnswer = getYourAnswer();
     if (correctAnswer === yourAnswer) {
-      console.log('Correct!');
+      console.log('Correct!')
       i += 1;
     } else {
       console.log(`'${yourAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`);
-      console.log(`Let's try again, ${name}!`);
+      console.log(`Let's try again, ${name}!`)
       return;
     }
   }
-  console.log(`Congratulations, ${name}!`);
+  console.log(`Congratulations, ${name}!`)
 };
 export default playGame;
