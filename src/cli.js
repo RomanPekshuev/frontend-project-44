@@ -1,18 +1,20 @@
-import readlineSync from 'readline-sync';
+// src/cli.js
 
-const getAnswer = (question) => readlineSync.question(question);
+import readlineSync from 'readline-sync'
+
+const getAnswer = (question) => readlineSync.question(question)
 
 const getName = () => {
-  const name = getAnswer('May I have your name? ');
-  return name;
-};
+  const name = getAnswer('May I have your name? ')
+  return name
+}
 
 const greet = () => {
-  console.log('Welcome to the Brain Games!');
-  const name = getName();
-  const result = `Hello, ${name}!`;
-  console.log(result);
-  return name;
-};
+  console.log('Welcome to the Brain Games!')
+  const name = getName()
+  const result = `Hello, ${name}!`
+  console.log(result)
+  return name
+}
 
-export { getAnswer, greet, getName };
+export { getAnswer, greet, getName }
