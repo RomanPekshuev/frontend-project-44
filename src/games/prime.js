@@ -28,3 +28,4 @@ const getQuestionAndAnswer = () => {
 export default () => {
   playGame(gameRules, getQuestionAndAnswer)
 }
+//

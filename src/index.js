@@ -11,13 +11,10 @@ const playGame = (gameRules, getQuestionAndAnswer) => {
     const [question, correctAnswer] = getQuestionAndAnswer()
     console.log(`Question: ${question}`)
     const yourAnswer = getYourAnswer()
-    if (correctAnswer === yourAnswer) 
-    {
+    if (correctAnswer === yourAnswer) {
       console.log('Correct!')
       i += 1
-    } 
-    else
-    {
+    } else {
       console.log(`'${yourAnswer}' is wrong answer ;(. Correct answer was '${correctAnswer}'.`)
       console.log(`Let's try again, ${name}!`)
       return
@@ -27,3 +24,4 @@ const playGame = (gameRules, getQuestionAndAnswer) => {
 }
 
 export default playGame
+//
