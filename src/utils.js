@@ -31,4 +31,3 @@ const getCorrectAnswer = (resultOfRandomizer) => {
 }
 
 export { randomizer, getYourAnswer, getCorrectAnswer }
-//
