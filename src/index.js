@@ -25,4 +25,3 @@ const playGame = (gameRules, getQuestionAndAnswer) => {
 }
 
 export default playGame
-//
